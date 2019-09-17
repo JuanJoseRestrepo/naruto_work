@@ -18,7 +18,7 @@ public class University implements Serializable{
 	}
 	
 	public ArrayList<Clan> getClanes() {
-		return clanes;
+		return clanes; 
 	}
 
 	public void setClanes(ArrayList<Clan> clanes) {

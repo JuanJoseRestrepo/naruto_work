@@ -11,9 +11,10 @@ public class Main {
 		reader = new Scanner(System.in);
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		Main m = new Main();
 		m.showMenu();
+
 	}
 
 	private void showMenu() {

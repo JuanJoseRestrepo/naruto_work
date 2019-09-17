@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.Comparator;
 
-public class Character implements Serializable, Comparator<Character>,Comparable<Character>{
+public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Samurai>{
 
 	/**
 	 * 
@@ -13,10 +13,10 @@ public class Character implements Serializable, Comparator<Character>,Comparable
 	private String personality;
 	private String creationDate;
 	private int power;
-	private Character previus;
-	private Character next;
+	private Samurai previus;
+	private Samurai next;
 	private Technique tech;
-	public Character(String nameCharacter,String personality,String creationDate,int power) {
+	public Samurai(String nameCharacter,String personality,String creationDate,int power) {
 		
 		this.nameCharacter = nameCharacter;
 		this.personality = personality;
@@ -57,7 +57,7 @@ public class Character implements Serializable, Comparator<Character>,Comparable
 		this.power = power;
 	}
 
-	public Character getPrevius() {
+	public Samurai getPrevius() {
 		return previus;
 	}
 
@@ -69,15 +69,15 @@ public class Character implements Serializable, Comparator<Character>,Comparable
 		this.tech = tech;
 	}
 
-	public void setPrevius(Character previus) {
+	public void setPrevius(Samurai previus) {
 		this.previus = previus;
 	}
 
-	public Character getNext() {
+	public Samurai getNext() {
 		return next;
 	}
 
-	public void setNext(Character next) {
+	public void setNext(Samurai next) {
 		this.next = next;
 	}
 	
@@ -136,10 +136,10 @@ public class Character implements Serializable, Comparator<Character>,Comparable
 			if(tAct.getName().equalsIgnoreCase(nameTecnique)) {
 				tech = tech.getNext();
 			}else {
-				while(!(tAct.getName().equalsIgnoreCase(nameTecnique))) {
+				while(!(tAct.getName().equalsIgnoreCase(nameTecnique)) && tAct != null) {
 					
-					tAct = tAct.getNext();
 					tempAnt = tAct;
+					tAct = tAct.getNext();
 			}
 				tempAnt.setNext(tAct.getNext());	
 		}
@@ -164,44 +164,73 @@ public class Character implements Serializable, Comparator<Character>,Comparable
 		boolean t = false;
 		
 		while(tAct != null && !t) {
-			
-		}
-		
-	}
-
-	public void ordenateInsercion() {
-		Technique t = tech;
-		
-		while(t != null) {
-			
-			while(t.getNext() != null) {
-				if(t.getName().compareToIgnoreCase(t.getNext().getName()) > 0) {
-					Technique t1 = t.getNext().getNext();
-					tech.setNext(t.getNext());
-					t.getNext().setNext(t);
-					t.setNext(t1);
-				}
+			if(tAct.getName().equalsIgnoreCase(nameTechnique)) {
+				tAct.setName(otherName);
+				t = true;
+			}else {
+				tAct = tech.getNext();
 			}
-			
-			
 		}
 		
+	}
+	
+	//Metodos finales
+	public String lookForNotRepeatTechniques(Technique e) {
+		Technique c = tech;
+		String msj = "";
+		boolean t = false;
 		
+		while(c != null && !t) {
+			
+		if(c.getName().compareToIgnoreCase(e.getName()) == 0) {
+			 msj = "Se encontro un personaje repetido";
+			 t = true;
+		}else {
+			c = c.getNext();
+		}	
 	}
+		if(t == false) {
+			msj = "No se encontro ningun personaje repetido";
+			addTechniqueNameTechnique(e);
+		}
+		
+		return msj;
+	}
+
 	@Override
-	public int compareTo(Character arg0) {
+	public int compareTo(Samurai arg0) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int compare(Character arg0, Character arg1) {
+	public int compare(Samurai arg0, Samurai arg1) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	
 	
-
+	public String toString() {
+		String msj = "";
+		
+		msj = "" + nameCharacter; 
+		msj = "" + personality; 	 	
+		msj = "" + creationDate;
+		msj = "" + power;
+		return msj;
+	}
 	
+	public String mostrarInfo() {
+		String msj = "";
+		Technique tAct = tech;
+		
+		while(tAct != null) {
+			
+			msj += tAct.toString() + "\n";
+			tAct = tAct.getNext();	
+		}
+		
+		return msj;
+	}
 	
 }

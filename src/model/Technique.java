@@ -38,10 +38,18 @@ public class Technique implements Serializable, Comparator<Technique>,Comparable
 
 	@Override
 	public int compareTo(Technique o) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		return name.compareTo(o.getName());
 	}
-
+	
+	public String toString() {
+		String msj = "";
+		
+		msj += "El nombre es:" + "||" + name + "||"; 
+		msj += "El influenciador de poder" + "||" + influencer + "||"; 
+		
+		return msj;
+	}
 
 	@Override
 	public int compare(Technique o1, Technique o2) {
