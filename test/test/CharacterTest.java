@@ -37,7 +37,9 @@ public class CharacterTest {
 	void testModificarInfluencer() {
 		setupEscenario();
 		
-		charac.modificarInfluencer("l", 100);
+		charac.delatedTechniqueNameTechnique("L"); 
+		charac.modificarInfluencer("m", 100);
+		System.out.println(charac.mostrarInfo());
 	}
 	
 }

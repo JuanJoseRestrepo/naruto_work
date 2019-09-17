@@ -154,7 +154,7 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 				tAct.setInfluencer(numberTechnique);
 				t = true;
 			}else {
-				tAct = tech.getNext();
+				tAct = tAct.getNext();
 			}	
 		}
 	}
