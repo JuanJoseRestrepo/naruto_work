@@ -1,12 +1,27 @@
 package model;
 
-public class Technique {
+import java.io.Serializable;
+import java.util.Comparator;
+
+public class Technique implements Serializable, Comparator<Technique>,Comparable<Technique>{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private int influencer;
+	private Technique next;
 	public Technique(String name, int influencer) {
 		this.name = name;
 		this.influencer = influencer;
+	}
+	
+	public Technique getNext() {
+		return next;
+	}
+	public void setNext(Technique next) {
+		this.next = next;
 	}
 	public String getName() {
 		return name;
@@ -20,7 +35,18 @@ public class Technique {
 	public void setInfluencer(int influencer) {
 		this.influencer = influencer;
 	}
+
+	@Override
+	public int compareTo(Technique o) {
+		// TODO Auto-generated method stub
+		return name.compareTo(o.getName());
+	}
+
+
+	@Override
+	public int compare(Technique o1, Technique o2) {
+		// TODO Auto-generated method stub
+		return o1.getInfluencer() - o2.getInfluencer();
+	}
 	
-
-
 }
