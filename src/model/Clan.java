@@ -15,31 +15,34 @@ public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samura
 	public Clan(String nameClan) {
 	this.nameClan = nameClan;	
 	}
+	
+	
 	public void addCharacter(Samurai e) {
 		Samurai c = charactersFirst;
-		Samurai c1 = null;
+		Samurai c1 = charactersLast;
 		
-		if(c == null) {
+		if(charactersFirst == null) {
+			
 			charactersFirst = e;
-			e.setPrevius(null);
-			e.setNext(e);
+			
+			
 		}else {
 			
 			if(e.getNameCharacter().compareToIgnoreCase(c.getNameCharacter()) < 0) {
 				
 				e.setNext(c);
 				c.setPrevius(e);
-				c = e;
+				charactersFirst = e;
+				
 			}else {
 				while(c != null && c.getNameCharacter().compareToIgnoreCase(e.getNameCharacter()) < 0) {
 					c1 = c;
-					c = charactersFirst.getNext();
-			}
+					c = c.getNext();
+				}
 				e.setNext(c);
-				c.setPrevius(e);
-				
+				e.setPrevius(c);
 				c1.setNext(e);
-				e.setPrevius(c1);
+				c1.setPrevius(e);
 		}	
 	}
 	
@@ -59,7 +62,8 @@ public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samura
 				c = c.getNext();
 			}
 			c1.setNext(c.getNext());
-			c.getNext().setPrevius(c1); 
+			c1.setPrevius(c.getNext());
+			//c.getNext().setPrevius(c1); 
 		}
 		
 		
@@ -77,7 +81,7 @@ public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samura
 			 msj = "Se encontro un personaje repetido";
 			 t = true;
 		}else {
-			c = charactersFirst.getNext();
+			c = c.getNext();
 		}	
 	}
 		if(t == false) {
@@ -88,6 +92,20 @@ public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samura
 		return msj;
 	}
 	
+	public String mostrarInfo() {
+		String msj = "";
+		Samurai tAct = charactersFirst;
+		
+		while(tAct != null) {
+			
+			msj += tAct.toString() + "\n";
+			tAct = tAct.getNext();	
+		}
+		
+		return msj;
+	}
+
+		
 	
 	@Override
 	public int compareTo(Samurai o) {

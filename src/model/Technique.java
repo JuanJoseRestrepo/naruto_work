@@ -53,8 +53,15 @@ public class Technique implements Serializable, Comparator<Technique>,Comparable
 
 	@Override
 	public int compare(Technique o1, Technique o2) {
-		// TODO Auto-generated method stub
-		return o1.getInfluencer() - o2.getInfluencer();
+		int k = 0;
+		
+		if(o1.getInfluencer() > o2.getInfluencer()) { 
+			k = 1;
+		}else if(o1.getInfluencer() < o2.getInfluencer()) {
+			k = -1;
+		}
+		
+		return k;
 	}
 	
 }

@@ -91,7 +91,7 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 		}else{
 				if(e.getName().compareToIgnoreCase(tAct.getName()) < 0) {
 					e.setNext(tAct);
-					tAct = e;
+					tech = e;
 			    }else {
 			    	while(tAct != null && tAct.getName().compareToIgnoreCase(e.getName()) < 0){
 			    		tempAnt = tAct;
@@ -111,11 +111,11 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 		if(tech == null) {
 			tech = e;
 		}else {
-			if(e.compare(e, tAct) < 0) {
+			if(e.compare(e, tAct) <= 0) {
 				e.setNext(tAct);
-				tAct = e;
+				tech = e;
 			}else {
-				while(tAct != null && tAct.compare(tAct,e) < 0) {
+				while(tAct != null && tAct.compare(tAct,e) <= 0) {
 					tempAnt = tAct;
 					tAct = tAct.getNext();
 				}
@@ -191,34 +191,77 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 	}
 		if(t == false) {
 			msj = "No se encontro ningun personaje repetido";
-			addTechniqueNameTechnique(e);
+			addTechniqueInfuencer(e);
 		}
 		
 		return msj;
 	}
 
 	@Override
-	public int compareTo(Samurai arg0) {
+	public int compareTo(Samurai o1) {
 		// TODO Auto-generated method stub
-		return 0;
+		return nameCharacter.compareToIgnoreCase(o1.getNameCharacter()) ;
 	}
 
 	@Override
-	public int compare(Samurai arg0, Samurai arg1) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compare(Samurai o1, Samurai o2) {
+		int resul = 0;
+		
+		if(o1.getPower() > o2.getPower()) {
+			resul = 1;
+		}else if(o1.getPower() < o2.getPower()) {
+			resul = -1;
+		}
+		
+		return resul;
 	}
 	
 	
 	public String toString() {
 		String msj = "";
 		
-		msj = "" + nameCharacter; 
-		msj = "" + personality; 	 	
-		msj = "" + creationDate;
-		msj = "" + power;
+		msj += "El nombre del personaje es:" + "||" + nameCharacter + "||"; 
+		msj += "//" + "La personalidad del personajes es:"+ "||" + personality+ "||"; 	 	
+		msj += "//" + "La fecha de creacion es:" + "||" + creationDate + "||";
+		msj += "//" + "El poder es:" + "||" + power + "||";
+		
 		return msj;
 	}
+	
+	public void ordenar() {
+		
+		boolean t;
+		
+		do {
+		Technique c = tech;
+		Technique c1 = null;
+		Technique sig = tech.getNext();
+		 t = false;
+		while(sig != null) {
+			if(c.getName().compareTo(sig.getName()) > 0) {
+				t = true;
+				if(c1 != null) {
+					Technique siguiente = sig.getNext();
+					c1.setNext(sig);
+					sig.setNext(c);
+					c.setNext(siguiente);
+				}else {
+					
+					Technique siguiente = sig.getNext();
+					tech = sig;
+					sig.setNext(c);
+					c.setNext(siguiente);
+				}
+				c1 = sig;
+				sig = c.getNext();
+			}else {
+				c1 = c;
+				c = sig;
+				sig = sig.getNext();
+			}
+		}
+	}while(t);
+}
 	
 	public String mostrarInfo() {
 		String msj = "";
