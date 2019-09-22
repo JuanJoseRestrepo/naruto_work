@@ -50,7 +50,7 @@ public class CharacterTest {
 		Technique e7 = new Technique("O",1);
 		Technique e8 = new Technique("Q",2);
 
-		charac.addInicio(e1);
+		charac.addFinal(e1);
 		charac.addInicio(e2);
 		charac.addInicio(e3);
 		charac.addInicio(e4);

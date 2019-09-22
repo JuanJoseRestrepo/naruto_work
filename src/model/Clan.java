@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import exceptions.SamuraiNotFoundException;
+
 public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samurai> {
 
 	/**
@@ -15,8 +17,36 @@ public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samura
 	public Clan(String nameClan) {
 	this.nameClan = nameClan;	
 	}
-	
-	
+	public String getNameClan() {
+		return nameClan;
+	}
+
+
+	public void setNameClan(String nameClan) {
+		this.nameClan = nameClan;
+	}
+
+
+	public Samurai getCharactersFirst() {
+		return charactersFirst;
+	}
+
+
+	public void setCharactersFirst(Samurai charactersFirst) {
+		this.charactersFirst = charactersFirst;
+	}
+
+
+	public Samurai getCharactersLast() {
+		return charactersLast;
+	}
+
+
+	public void setCharactersLast(Samurai charactersLast) {
+		this.charactersLast = charactersLast;
+	}
+
+
 	public void addCharacterFinal(Samurai e) {
 		
 		if(charactersFirst == null) {
@@ -55,11 +85,26 @@ public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samura
 			}
 			
 		}
-		
-		
-		
 	}
 
+	public String callTheMethodNotRepeatTechniques(String nameSamu,Technique e) throws SamuraiNotFoundException {
+		String msj = "";
+		Samurai m = charactersFirst;
+		boolean t = false;
+		while(m != null && !t ) {
+			if(m.getNameCharacter().equalsIgnoreCase(nameSamu)) {
+				msj += m.lookForNotRepeatTechniques(e);
+				t = true;
+		}else {
+			m = m.getNext();
+		}
+	}
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro el samurai");
+		}
+		return msj;
+	}
+	
 	//Metodos finales
 	public String lookForNotRepeatCharacters(Samurai e) {
 		Samurai c = charactersFirst;
@@ -76,7 +121,7 @@ public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samura
 		}	
 	}
 		if(t == false) {
-			msj = "No se encontro ningun personaje repetido";
+			msj = "No se encontro ningun personaje repetido,Se agrego B)";
 			addCharacterFinal(e);
 		}
 		
@@ -182,6 +227,14 @@ public void ordenarPorBurbujaMejorada() {
 		}while(t);
 	 }
 	 
+	public String toString() {
+		String msj = "";
+		
+		msj = "El nombre del Clan es:"+ "||" + nameClan + "||";
+		
+		return msj;
+		
+	}
 		
 	
 	@Override

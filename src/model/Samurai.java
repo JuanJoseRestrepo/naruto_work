@@ -205,7 +205,7 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 		}	
 	}
 		if(t == false) {
-			msj = "No se encontro ningun personaje repetido";
+			msj = "No se encontro ninguna tecnica repetida,se agrego B)";
 			addTechniqueInfuencer(e);
 		}
 		
@@ -305,7 +305,7 @@ public void modificarPosicion(int x, Technique p) {
 				addInicio(a1);
 				modificarPosicion(pos1, a2);
 			}else {
-				
+				insert(menor.getName(), a2);
 				delatedTechniqueNameTechnique(menor.getName());
 				modificarPosicion(i, menor);
 			}
@@ -313,12 +313,36 @@ public void modificarPosicion(int x, Technique p) {
 }
 //////////////////////////////////////////////////////////////////////////////
 	
-	public void insertarDurante() {
-		
-		
-		
+	public void insert(String nombreTec,Technique e) {
+		Technique first = tech;
+		Technique ant = null;
+		boolean t = false;
+		while(first != null && !t) {
+			if(first.getName().compareTo(nombreTec) == 0) {
+				ant = first;
+				t = true;
+			}else {
+				first = first.getNext();
+			}
+		}
+		Technique nextNext = ant.getNext();
+		ant.setNext(e);
+		e.setNext(nextNext);
 	}
 	
+	
+	public void addFinal(Technique e) {
+		if(tech == null) {
+			tech = e;
+			
+		}else {
+		 Technique tAct = tech;
+		 while(tAct.getNext() != null) {
+			 tAct = tAct.getNext();
+		 }
+		 tAct.setNext(e);
+		}
+	}
 	
 	public int longitud() {
 		int resul = 0;
