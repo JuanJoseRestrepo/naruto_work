@@ -88,7 +88,7 @@ class testClan {
 		c.delatedSamurai("B");
 		c.delatedSamurai("A");
 		c.delatedSamurai("Z");
-		c.ordenarPorSeleccion1();
+		c.ordenarPorBurbujaMejorada();
 		System.out.println("ad" + c.mostrarInfo() + "ad");
 	}
 	
@@ -96,14 +96,14 @@ class testClan {
 	void ordenar() {
 		setupEscenario1();
 		
-		c.ordenarPorSeleccion1();
+		c.ordenarPorBurbujaMejorada();
 		System.out.println("//" + c.mostrarInfo() + "//");
 	}
 	
 	@Test
 	void agregarInicio() {
 		setupEscenario2();
-		c.ordenarPorSeleccion1();
+		c.ordenarPorBurbujaMejorada();
 		System.out.println("//oo" + c.mostrarInfo() + "//");
 	}
 

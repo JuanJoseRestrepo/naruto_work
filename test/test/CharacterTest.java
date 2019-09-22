@@ -37,6 +37,38 @@ public class CharacterTest {
     	charac.lookForNotRepeatTechniques(e11);
 	}
 	
+	public void setupEscenario2() {
+		charac = new Samurai("","","",4);
+		
+
+		Technique e2 = new Technique("M",2);
+		Technique e3 = new Technique("L",3);
+		Technique e4 = new Technique("Z",6);
+		Technique e1 = new Technique("K",8);
+		Technique e5 = new Technique("I",8);
+		Technique e6 = new Technique("J",2);
+		Technique e7 = new Technique("O",1);
+		Technique e8 = new Technique("Q",2);
+
+		charac.addInicio(e1);
+		charac.addInicio(e2);
+		charac.addInicio(e3);
+		charac.addInicio(e4);
+		charac.addInicio(e5);
+		charac.addInicio(e6);
+		charac.addInicio(e7);
+		charac.addInicio(e8);
+		
+		
+	}
+	
+	@Test
+	void mostrar() {
+		setupEscenario2();
+		System.out.println("AQUIIIII");
+		System.out.println(charac.mostrarInfo());
+	}
+	
 	
 	@Test
 	void testEliminar() {
@@ -52,21 +84,21 @@ public class CharacterTest {
 		
 	
 		charac.modificarInfluencer("m", 100);
-		charac.ordenarPorSeleccion();
+		charac.ordenarPorInsercion();
 		System.out.println(charac.mostrarInfo());
 	}
 	
 	@Test
 	void ordenar() {
 		setupEscenario();
-		charac.ordenarBurbuja();
+		charac.ordenarPorSeleccion();
 		System.out.println("//" +charac.mostrarInfo());
 	}
 	
 	@Test
 	void ordenar1() {
 		setupEscenario();
-		charac.ordenarPorSeleccion();
+		charac.ordenarPorInsercion();
 		System.out.println("//--" +charac.mostrarInfo());
 	}
 	

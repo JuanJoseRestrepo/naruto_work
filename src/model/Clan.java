@@ -142,68 +142,8 @@ public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samura
 		
 	}
 	
-	public void modificarPosicion(int x, Samurai p) {
-		
-		if(x == 0) {
-			Samurai first = charactersFirst;
-			Samurai ant = null;
-			Samurai siguiente = null;
-			siguiente = first.getNext();
-			charactersFirst = p;
-			p.setNext(siguiente);
-			p.setPrevius(ant);
-		}else if(x != longitud()-1) {
-			Samurai first2 = charactersFirst;
-			Samurai ant2 = null;
-			Samurai siguiente2 = null;
-			
-			first2 = indiceElement(x);
-			ant2 = first2.getPrevius();
-			siguiente2 = first2.getNext();
-			
-			ant2.setNext(p);
-			p.setPrevius(p);
-			p.setNext(siguiente2);
-			siguiente2.setPrevius(p);
-		}else if(x == longitud() -1) {
-			Samurai first3= charactersFirst;
-			Samurai ant3 = null;
-			Samurai siguiente3 = null;
-			
-			first3 = indiceElement(x);
-			ant3 = first3.getPrevius();
-			ant3.setNext(p);
-			p.setPrevius(ant3);
-			p.setNext(siguiente3);
-		}
-		
-	}
 	
-	
-	 public void ordenarSeleccion() {
-		 Samurai temp = null;
-		 Samurai mayor = null;
-		 Samurai temp1 = charactersFirst;
-		 int pos = 0;
-		 int pos1 = 0;
-		 while(temp1 != null) {
-			 Samurai menor = indiceElement(pos);
-			for(int j = pos+1; j < longitud();j++) {
-				mayor = indiceElement(j);
-				if(mayor.compareTo(menor) < 0) {
-				 menor = mayor;	
-				 pos1 = j;
-			 }
-		 }
-		Samurai temp11 = indiceElement(pos);
-		modificarPosicion(pos1, menor);
-		modificarPosicion(pos, temp11);
-		temp1 = temp1.getNext();
-		pos++;
-	 }
-}
-	 
-	 public void ordenarPorSeleccion1() {
+public void ordenarPorBurbujaMejorada() {
 			
 			boolean t;
 			

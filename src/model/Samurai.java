@@ -81,6 +81,21 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 		this.next = next;
 	}
 	
+	public void addInicio(Technique e) {
+		Technique first = tech;
+		
+		if(tech == null) {
+			tech = e;
+		}else {
+			
+			e.setNext(first);
+			tech = e;
+		}
+		
+		
+	}
+	
+	
 	public void addTechniqueNameTechnique(Technique e) {
 		Technique tAct = tech;
 		Technique tempAnt = null;
@@ -234,40 +249,76 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 		return msj;
 	}
 	
-	public void ordenarBurbuja() {
+public void modificarPosicion(int x, Technique p) {
 		
-		boolean t;
-		
-		do {
-		Technique c = tech;
-		Technique c1 = null;
-		Technique sig = tech.getNext();
-		 t = false;
-		while(sig != null) {
-			if(c.compareTo(sig) > 0) {
-				t = true;
-				if(c1 != null) {
-					Technique siguiente = sig.getNext();
-					c1.setNext(sig);
-					sig.setNext(c);
-					c.setNext(siguiente);
-				}else {
-					
-					Technique siguiente = sig.getNext();
-					tech = sig;
-					sig.setNext(c);
-					c.setNext(siguiente);
-				}
-				c1 = sig;
-				sig = c.getNext();
-			}else {
-				c1 = c;
-				c = sig;
-				sig = sig.getNext();
-			}
+		if(x == 0) {
+			Technique first = tech;
+			Technique ant = null;
+			Technique siguiente = null;
+			siguiente = first.getNext();
+			tech = p;
+			p.setNext(siguiente);
+		}else if(x != longitud()-1) {
+			Technique first2 = tech;
+			Technique ant2 = null;
+			Technique siguiente2 = null;
+			
+			first2 = indiceElement(x);
+			ant2 = indiceElement(x-1);
+			siguiente2 = first2.getNext();
+			
+			ant2.setNext(p);
+			p.setNext(siguiente2);
+		}else if(x == longitud() -1) {
+			Technique first3= tech;
+			Technique ant3 = null;
+			Technique siguiente3 = null;
+			
+			first3 = indiceElement(x);
+			ant3 = indiceElement(x-1);
+			ant3.setNext(p);
+			p.setNext(siguiente3);
 		}
-	}while(t);
+		
+	}
+////////////////////////////////////////////////////////////////////////////////////	
+	public void ordenarPorSeleccion() {
+		
+		 Technique temp = null;
+		 Technique mayor = null;
+		 Technique temp1 = tech;
+		 int pos1 = 0;
+		 for(int i = 0; i < longitud();i++) {
+			 Technique menor = indiceElement(i);
+			for(int j = i+1; j < longitud();j++) {
+				mayor = indiceElement(j);
+				if(mayor.compareTo(menor) < 0) {
+				 menor = mayor;	
+				 pos1 = j;
+			 }
+		 }
+			Technique a1 = new Technique(menor.getName(),menor.getInfluencer());
+			Technique a2 = new Technique(indiceElement(i).getName(),indiceElement(i).getInfluencer());
+			
+			if(indiceElement(i) == tech) {
+				delatedTechniqueNameTechnique(a2.getName());
+				addInicio(a1);
+				modificarPosicion(pos1, a2);
+			}else {
+				
+				delatedTechniqueNameTechnique(menor.getName());
+				modificarPosicion(i, menor);
+			}
+	 }
 }
+//////////////////////////////////////////////////////////////////////////////
+	
+	public void insertarDurante() {
+		
+		
+		
+	}
+	
 	
 	public int longitud() {
 		int resul = 0;
@@ -300,7 +351,7 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 		return samu;
 	}
 	
-public void ordenarPorSeleccion() {
+public void ordenarPorInsercion() {
 		
 		Technique m = null;
 		int pos = 0;
