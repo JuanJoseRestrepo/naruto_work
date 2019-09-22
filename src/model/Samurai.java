@@ -117,7 +117,7 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 			}else {
 				while(tAct != null && tAct.compare(tAct,e) <= 0) {
 					tempAnt = tAct;
-					tAct = tAct.getNext();
+					tAct = tAct.getNext(); 
 				}
 				
 				e.setNext(tAct);
@@ -202,6 +202,12 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 		// TODO Auto-generated method stub
 		return nameCharacter.compareToIgnoreCase(o1.getNameCharacter()) ;
 	}
+	
+	public int compareToPersonality(Samurai o1) {
+		
+		return personality.compareToIgnoreCase(o1.getPersonality());
+		
+	}
 
 	@Override
 	public int compare(Samurai o1, Samurai o2) {
@@ -228,7 +234,7 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 		return msj;
 	}
 	
-	public void ordenar() {
+	public void ordenarBurbuja() {
 		
 		boolean t;
 		
@@ -238,7 +244,7 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 		Technique sig = tech.getNext();
 		 t = false;
 		while(sig != null) {
-			if(c.getName().compareTo(sig.getName()) > 0) {
+			if(c.compareTo(sig) > 0) {
 				t = true;
 				if(c1 != null) {
 					Technique siguiente = sig.getNext();
@@ -262,6 +268,109 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 		}
 	}while(t);
 }
+	
+	public int longitud() {
+		int resul = 0;
+		Technique m = tech;
+		
+		while(m != null) {
+			resul++;
+			m = m.getNext();
+		}
+		
+		return resul;
+		
+	}
+	
+	public Technique indiceElement(int posicion) {
+		Technique samu = tech;
+		
+		if(posicion != 0) {
+			for(int i = 0; i < posicion;i++) {
+				
+				samu = samu.getNext();
+				
+			}
+		}else {
+			
+			samu = tech;
+			
+		}
+		
+		return samu;
+	}
+	
+public void ordenarPorSeleccion() {
+		
+		Technique m = null;
+		int pos = 0;
+		for(int j = 1; j < longitud();j++) {
+			 m = indiceElement(j);
+			 pos = j-1;
+			while(indiceElement(pos).compare(indiceElement(pos),m) > 0 && pos > -1) {
+				Technique m1 = indiceElement(pos);
+				Technique m2 = m;
+				
+				if(m1 == null) {
+					Technique temp1 = m1;
+					Technique siguiente = m2.getNext();
+					tech = m2;
+					m2.setNext(temp1);
+					temp1.setNext(siguiente);
+				}else {
+					Technique temp = m1;
+					Technique siguiente1 = m2.getNext();
+					Technique ant = indiceElement(pos -1);
+					ant.setNext(m2);
+					m2.setNext(temp);
+					temp.setNext(siguiente1);
+				}
+				pos--;
+			}
+			Technique cent = indiceElement(pos +1);
+			cent = m;
+		}
+		
+		
+	}
+	
+//	public void ordenarPorSeleccion() {
+//		
+//	Technique tAct = tech;
+//	Technique tAnt = null;
+//	Technique siguiente = tech.getNext();
+//	
+//	while(tAct !=null) {
+//		
+//		while(siguiente != null) {
+//		
+//		if(tAct.compare(tAct,siguiente) > 0) {
+//			if(tAnt != null) {
+//				Technique siguiente1 = siguiente.getNext();
+//				tAnt.setNext(siguiente);
+//				siguiente.setNext(tAct);
+//				tAct.setNext(siguiente1);
+//			}else {
+//			Technique temp = siguiente.getNext();
+//			tech = siguiente;
+//			siguiente.setNext(tAct);
+//			tAct.setNext(temp);
+//			}
+//			tAnt = siguiente;
+//			siguiente = siguiente.getNext();	
+//		}else {
+//			tAnt = tAct;
+////			tAct = siguiente;
+//			siguiente = siguiente.getNext();
+//		}
+////		siguiente = siguiente.getNext();
+//	}
+//		tAct = tAct.getNext();
+////		siguiente = tAct.getNext();
+//}
+//		
+//		
+//	}
 	
 	public String mostrarInfo() {
 		String msj = "";
