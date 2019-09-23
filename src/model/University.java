@@ -21,6 +21,39 @@ public class University implements Serializable{
 		deserializableClan();
 	}
 	
+	public void modifiqueNameClan(String nameClan,String nameNew) throws notClanException {
+		boolean t = false;
+		
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				clanes.get(i).setNameClan(nameNew);
+				t = true;
+			}
+		}
+		
+		if(t == false) {
+			throw new notClanException("No se encontro el clan");
+		}
+		
+	}
+	
+	public void modifiqueName(String nameClan,String nameSamurai,String nameNew) throws SamuraiNotFoundException, notClanException {
+		
+		boolean t = false;
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				
+				clanes.get(i).modificarNameCharacter(nameSamurai, nameNew);
+				t = true;
+			}
+		}
+		if(t == false) {
+			throw new notClanException("No se encontro");
+		}
+		
+	}
+	
+	
 	public void addClan(String nameClan) throws ClanSImilarException {
 		
 			boolean t = false;
@@ -158,6 +191,7 @@ public class University implements Serializable{
 		for(int i = 0; i < clanes.size() && !t;i++) {
 			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
 				clanes.get(i).ordenarPorBurbujaMejorada();
+				t = true;
 			}
 		}
 		

@@ -46,6 +46,25 @@ public class Clan implements Serializable, Comparator<Clan>,Comparable<Clan> {
 		this.charactersLast = charactersLast;
 	}
 
+	public void modificarNameCharacter(String nameCharacter,String nameNew) throws SamuraiNotFoundException {
+		Samurai m = charactersFirst;
+		boolean t = false;
+		
+		while(m != null && !t) {
+			if(m.getNameCharacter().equalsIgnoreCase(nameCharacter)) {
+				
+				m.setNameCharacter(nameNew);
+				t = true;
+			}else {
+				m = m.getNext();
+			}
+		}
+		
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro");
+		}
+		
+	}
 
 	public void addCharacterFinal(Samurai e) {
 		
