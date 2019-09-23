@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import exceptions.ClanSImilarException;
 import exceptions.SamuraiNotFoundException;
 import exceptions.notClanException;
+import exceptions.notFoundTechnique;
 
 public class University implements Serializable{
 
@@ -33,6 +34,24 @@ public class University implements Serializable{
 		}
 	}
 	
+	public String searchObjectClan(String nameC) throws notClanException {
+		String msj = "";
+		boolean t = false;
+		for(int i = 0; i <  clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameC)) {
+				msj += clanes.get(i).toString();
+				t = true;
+			}
+		}
+		
+		if(t == false) {
+			throw new notClanException("No se encontro");
+		}
+		
+		
+		return msj;
+	}
+	
 	public void ordenarPorSeleccion() {
 		
 		for(int i = 0; i < clanes.size();i++) {
@@ -48,6 +67,41 @@ public class University implements Serializable{
 			Clan temp = clanes.get(i);
 			clanes.set(i, menor);
 			clanes.set(indice, temp);
+		}
+		
+	}
+	
+	public void modifiquePowerTechnique(String nameClan,String nameSamurai,String nameTechnique,int powerInfluencer) throws notFoundTechnique, SamuraiNotFoundException, notClanException {
+		
+		boolean t = false;
+		
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				
+				clanes.get(i).modificarInfluencerTechnique(nameSamurai, nameTechnique,powerInfluencer);
+				t = true;
+			}
+		}
+		if(t == false) {
+			throw new notClanException("No se encontro");
+		}
+		
+	}
+	
+	
+	public void modifiqueNameTechnique(String nameClan,String nameSamurai,String nameTechnique,String newTechnique) throws notClanException, SamuraiNotFoundException, notFoundTechnique {
+		
+		boolean t = false;
+		
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				
+				clanes.get(i).modificarNameTechnique(nameSamurai, nameTechnique,newTechnique);
+				t = true;
+			}
+		}
+		if(t == false) {
+			throw new notClanException("No se encontro");
 		}
 		
 	}
@@ -269,7 +323,17 @@ public class University implements Serializable{
 		return msj;
 	}
 
-	public void callSortBurble(String nameClan) {
+	public void callSortBurblePorNombre(String nameClan) {
+		boolean t = false;
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				clanes.get(i).ordenarPorBurbujaMejorada();
+				t = true;
+			}
+		}	
+	}
+	
+	public void callSortBurblePorPower(String nameClan) {
 		boolean t = false;
 		for(int i = 0; i < clanes.size() && !t;i++) {
 			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {

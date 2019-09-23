@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 import exceptions.SamuraiNotFoundException;
+import exceptions.notClanException;
+import exceptions.notFoundTechnique;
 
 public class Clan implements Serializable, Comparator<Clan>,Comparable<Clan> {
 
@@ -44,6 +46,62 @@ public class Clan implements Serializable, Comparator<Clan>,Comparable<Clan> {
 
 	public void setCharactersLast(Samurai charactersLast) {
 		this.charactersLast = charactersLast;
+	}
+	
+	public void callMethodInsercion(String nameSamurai) {
+		Samurai m = charactersFirst;
+		boolean t = false;
+		
+		while(m != null && !t) {
+			if(m.getNameCharacter().equalsIgnoreCase(nameSamurai)) {
+				m.ordenarPorInsercion();
+				t = true;
+			}else {
+			m = m.getNext();
+			}
+		}
+		
+	}
+	
+	public void modificarInfluencerTechnique(String nameCharacter,String nameTechnique,int influencer) throws notFoundTechnique, SamuraiNotFoundException {
+		Samurai m = charactersFirst;
+		boolean t = false;
+		
+		while(m != null && !t) {
+			if(m.getNameCharacter().equalsIgnoreCase(nameCharacter)) {
+				
+				m.modificarInfluencer(nameTechnique,influencer);
+				t = true;
+			}else {
+				m = m.getNext();
+			}
+		}
+		
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro un ninja");
+		}
+		
+		
+	}
+	
+	public void modificarNameTechnique(String nameCharacter,String nameTechnique,String nameNewTechnique) throws notClanException, SamuraiNotFoundException, notFoundTechnique {
+		Samurai m = charactersFirst;
+		boolean t = false;
+		
+		while(m != null && !t) {
+			if(m.getNameCharacter().equalsIgnoreCase(nameCharacter)) {
+				
+				m.modificarInfoName(nameTechnique,nameNewTechnique);
+				t = true;
+			}else {
+				m = m.getNext();
+			}
+		}
+		
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro un ninja");
+		}
+		
 	}
 	
 	public void modificarPowerSamurai(String nameCharacter,int powerNew) throws SamuraiNotFoundException {

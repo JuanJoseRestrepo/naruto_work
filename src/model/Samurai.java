@@ -3,6 +3,9 @@ package model;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import exceptions.notClanException;
+import exceptions.notFoundTechnique;
+
 public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Samurai>{
 
 	/**
@@ -160,7 +163,7 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 		}
 	}
 	
-	public void modificarInfluencer(String nameTecnique,int numberTechnique) {
+	public void modificarInfluencer(String nameTecnique,int numberTechnique) throws notFoundTechnique {
 		
 		Technique tAct = tech;
 		boolean t = false;
@@ -172,9 +175,14 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 				tAct = tAct.getNext();
 			}	
 		}
+		
+		if(t == false) {
+			throw new notFoundTechnique("No se encontro");
+		}
+		
 	}
 	
-	public void modificarInfoName(String nameTechnique,String otherName) {
+	public void modificarInfoName(String nameTechnique,String otherName) throws notClanException, notFoundTechnique {
 		Technique tAct = tech;
 		boolean t = false;
 		
@@ -183,10 +191,13 @@ public class Samurai implements Serializable, Comparator<Samurai>,Comparable<Sam
 				tAct.setName(otherName);
 				t = true;
 			}else {
-				tAct = tech.getNext();
+				tAct = tAct.getNext();
 			}
 		}
 		
+		if(t == false) {
+			throw new notFoundTechnique("No se encontro");
+		}
 	}
 	
 	//Metodos finales
@@ -408,44 +419,6 @@ public void ordenarPorInsercion() {
 		
 		
 	}
-	
-//	public void ordenarPorSeleccion() {
-//		
-//	Technique tAct = tech;
-//	Technique tAnt = null;
-//	Technique siguiente = tech.getNext();
-//	
-//	while(tAct !=null) {
-//		
-//		while(siguiente != null) {
-//		
-//		if(tAct.compare(tAct,siguiente) > 0) {
-//			if(tAnt != null) {
-//				Technique siguiente1 = siguiente.getNext();
-//				tAnt.setNext(siguiente);
-//				siguiente.setNext(tAct);
-//				tAct.setNext(siguiente1);
-//			}else {
-//			Technique temp = siguiente.getNext();
-//			tech = siguiente;
-//			siguiente.setNext(tAct);
-//			tAct.setNext(temp);
-//			}
-//			tAnt = siguiente;
-//			siguiente = siguiente.getNext();	
-//		}else {
-//			tAnt = tAct;
-////			tAct = siguiente;
-//			siguiente = siguiente.getNext();
-//		}
-////		siguiente = siguiente.getNext();
-//	}
-//		tAct = tAct.getNext();
-////		siguiente = tAct.getNext();
-//}
-//		
-//		
-//	}
 	
 	public String mostrarInfo() {
 		String msj = "";

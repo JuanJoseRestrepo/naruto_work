@@ -6,6 +6,7 @@ import exceptions.ClanSImilarException;
 import exceptions.SamuraiNotFoundException;
 import exceptions.errorRank;
 import exceptions.notClanException;
+import exceptions.notFoundTechnique;
 import model.*;
 
 public class Main {
@@ -77,7 +78,7 @@ public class Main {
 				Samurai m = new Samurai(nameSa,personality,dates,power);
 				
 				System.out.println(univer.callTheMethodLookForTheNoRepeatSamurai(nombreC, m));
-				univer.callSortBurble(nombreC);
+				univer.callSortBurblePorNombre(nombreC);
 				System.out.println(univer.showInformationSamurai(nombreC));
 			}else if(inputUser == 3){
 				System.out.println("Digite el nombre del clan");
@@ -200,7 +201,7 @@ public class Main {
 				System.out.println(univer.showInformationSamurai(nameC));
 				
 			}else if(inputUser == 14) {
-				System.out.println("Digite el samurai al cual le va a cambiar el poder");
+				System.out.println("Digite el clan del samurai al cual le va a cambiar el poder");
 				String nameC = reader.nextLine();
 				
 				System.out.println("Digite el samurai al cual le va a cambiar el poder");
@@ -214,9 +215,36 @@ public class Main {
 				System.out.println(univer.showInformationSamurai(nameC));
 				
 			}else if(inputUser == 15) {
+				System.out.println("Digite el nombre del clan al cual le va a cambiar el nombre de la tecnica");
+				String nameC = reader.nextLine();
 				
+				System.out.println("Digite el nombre del samurai al cual le va a cambiar la tecnica");
+				String nameSamu = reader.nextLine();
+				
+				System.out.println("Digite el nombre de la tecnica que va a cambiar");
+				String nameTechnique = reader.nextLine();
+				
+				System.out.println("Digite el nombre nuevo de la tecnica que va a cambiar");
+				String techNew = reader.nextLine();
+				
+				univer.modifiqueNameTechnique(nameC, nameSamu, nameTechnique, techNew);
+				System.out.println(univer.showInformationTechnique(nameC, nameSamu));
 			}else if(inputUser == 16) {
+				System.out.println("Digite el nombre del clan al cual le va a cambiar el poder de la tecnica");
+				String nameC = reader.nextLine();
 				
+				System.out.println("Digite el nombre del samurai al cual le va a cambiar la tecnica");
+				String nameSamu = reader.nextLine();
+				
+				System.out.println("Digite el nombre de la tecnica que va a cambiar");
+				String nameTechnique = reader.nextLine();
+				
+				System.out.println("Digite el poder nuevo de la tecnica que va a cambiar");
+				int powerTech = reader.nextInt();
+				reader.nextLine();
+				
+				univer.modifiquePowerTechnique(nameC, nameSamu, nameTechnique, powerTech);
+				System.out.println(univer.showInformationTechnique(nameC, nameSamu));
 			}
 			else if(inputUser == 17){
 			
@@ -239,6 +267,9 @@ public class Main {
 			e.getCause();
 		} catch (errorRank e) {
 			System.out.println("Por favor digite un rango valido");
+			e.getCause();
+		} catch (notFoundTechnique e) {
+			System.out.println("No se encontro la tecnica");
 			e.getCause();
 		}
 	}

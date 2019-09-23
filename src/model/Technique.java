@@ -46,7 +46,7 @@ public class Technique implements Serializable, Comparator<Technique>,Comparable
 		String msj = "";
 		
 		msj += "El nombre es:" + "||" + name + "||"; 
-		msj += "El influenciador de poder" + "||" + influencer + "||"; 
+		msj += "El influenciador de poder:" + "||" + influencer + "||"; 
 		
 		return msj;
 	}

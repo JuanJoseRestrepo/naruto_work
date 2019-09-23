@@ -1,6 +1,7 @@
 package test;
 import org.junit.jupiter.api.Test;
 
+import exceptions.notFoundTechnique;
 import model.*;
 import model.Samurai;
 
@@ -23,6 +24,7 @@ public class CharacterTest {
 		Technique e9 = new Technique("U",3);
 		Technique e10 = new Technique("D",6);
 		Technique e11 = new Technique("H",6);
+		Technique e12 = new Technique("ZZZ",9);
 		
 		charac.lookForNotRepeatTechniques(e7);
 		charac.lookForNotRepeatTechniques(e4);
@@ -33,8 +35,9 @@ public class CharacterTest {
     	charac.lookForNotRepeatTechniques(e2);
     	charac.lookForNotRepeatTechniques(e8);
     	charac.lookForNotRepeatTechniques(e9);
-    	charac.lookForNotRepeatTechniques(e10);
+    	charac.lookForNotRepeatTechniques(e12);
     	charac.lookForNotRepeatTechniques(e11);
+    	charac.lookForNotRepeatTechniques(e10);
 	}
 	
 	public void setupEscenario2() {
@@ -64,7 +67,7 @@ public class CharacterTest {
 	
 	@Test
 	void mostrar() {
-		setupEscenario2();
+		setupEscenario();
 		System.out.println("AQUIIIII");
 		System.out.println(charac.mostrarInfo());
 	}
@@ -83,9 +86,14 @@ public class CharacterTest {
 		setupEscenario();
 		
 	
-		charac.modificarInfluencer("m", 100);
-		charac.ordenarPorInsercion();
-		System.out.println(charac.mostrarInfo());
+		try {
+			charac.modificarInfluencer("m", 100);
+			charac.ordenarPorInsercion();
+			System.out.println(charac.mostrarInfo());
+		} catch (notFoundTechnique e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
