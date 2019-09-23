@@ -129,6 +129,7 @@ public class Main {
 			
 			}else if(inputUser == 7) {
 				
+				univer.ordenarPorInsercion();
 				System.out.println(univer.infoClan());
 				
 			}else if(inputUser == 8) {
@@ -155,16 +156,62 @@ public class Main {
 				String nameNew = reader.nextLine();
 				
 				univer.modifiqueNameClan(nameC, nameNew);
+				univer.ordenarPorInsercion();
 				System.out.println(univer.infoClan());
 				
 			}else if(inputUser == 11) {
-				System.out.println("");
+				System.out.println("Digite el nombre del clan donde va a cambiar el personaje");
+				String nameC = reader.nextLine();
+				
+				System.out.println("Digite el nombre del samurai a cambiar");
+				String nameSamu = reader.nextLine();
+				
+				System.out.println("Digite el nuevo nombre del samurai");
+				String nameNew = reader.nextLine();
+				
+				univer.modifiqueName(nameC, nameSamu, nameNew);
+				univer.ordenarPorSeleccion();
+				System.out.println(univer.showInformationSamurai(nameC));
 				
 			}else if(inputUser == 12) {
+				System.out.println("Digite el nombre del clan donde va a cambiar la personalidad de la personalidad");
+				String nameC = reader.nextLine();
+				
+				System.out.println("Digite el nombre del samurai a cambiar");
+				String nameSamu = reader.nextLine();
+				
+				System.out.println("Digite la personalidad del samurai");
+				String perso = reader.nextLine();
+				
+				univer.modifiqueNameInfluencer(nameC, nameSamu, perso);
+				System.out.println(univer.showInformationSamurai(nameC));
 				
 			}else if(inputUser == 13) {
+				System.out.println("Digite el nombre del clan donde va a cambiar la fecha de creacion");
+				String nameC = reader.nextLine();
+				
+				System.out.println("Digite el samurai al cual le va a cambiar la fecha");
+				String nameSamu = reader.nextLine();
+				
+				System.out.println("Digite la fecha nueva" + " " + "||" + "En formato de YYYY/MM/DD"+ "||");
+				String dateCreation = reader.nextLine();
+				
+				univer.modifiqueDateCreation(nameC, nameSamu, dateCreation);
+				System.out.println(univer.showInformationSamurai(nameC));
 				
 			}else if(inputUser == 14) {
+				System.out.println("Digite el samurai al cual le va a cambiar el poder");
+				String nameC = reader.nextLine();
+				
+				System.out.println("Digite el samurai al cual le va a cambiar el poder");
+				String nameSamu = reader.nextLine();
+				
+				System.out.println("Digite el nuevo poder a cambiar");
+				int power = reader.nextInt();
+				reader.nextLine();
+				
+				univer.modifiquePower(nameC, nameSamu, power);
+				System.out.println(univer.showInformationSamurai(nameC));
 				
 			}else if(inputUser == 15) {
 				

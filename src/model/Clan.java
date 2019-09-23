@@ -45,6 +45,66 @@ public class Clan implements Serializable, Comparator<Clan>,Comparable<Clan> {
 	public void setCharactersLast(Samurai charactersLast) {
 		this.charactersLast = charactersLast;
 	}
+	
+	public void modificarPowerSamurai(String nameCharacter,int powerNew) throws SamuraiNotFoundException {
+		Samurai m = charactersFirst;
+		boolean t = false;
+		
+		while(m != null && !t) {
+			if(m.getNameCharacter().equalsIgnoreCase(nameCharacter)) {
+				
+				m.setPower(powerNew);
+				t = true;
+			}else {
+				m = m.getNext();
+			}
+		}
+		
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro un ninja");
+		}
+		
+	}
+	
+	
+	public void modificarDateSamurai(String nameCharacter,String creationDate) throws SamuraiNotFoundException {
+		Samurai m = charactersFirst;
+		boolean t = false;
+		
+		while(m != null && !t) {
+			if(m.getNameCharacter().equalsIgnoreCase(nameCharacter)) {
+				
+				m.setCreationDate(creationDate);
+				t = true;
+			}else {
+				m = m.getNext();
+			}
+		}
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro");
+		}
+	}	
+	
+	public void modificarNameInfluencer(String nameCharacter,String nameNewInfluencer) throws SamuraiNotFoundException {
+		Samurai m = charactersFirst;
+		boolean t = false;
+		
+		while(m != null && !t) {
+			if(m.getNameCharacter().equalsIgnoreCase(nameCharacter)) {
+				
+				m.setPersonality(nameNewInfluencer);
+				t = true;
+			}else {
+				m = m.getNext();
+			}
+		}
+		
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro");
+		}
+		
+	}
+	
 
 	public void modificarNameCharacter(String nameCharacter,String nameNew) throws SamuraiNotFoundException {
 		Samurai m = charactersFirst;
@@ -124,7 +184,7 @@ public class Clan implements Serializable, Comparator<Clan>,Comparable<Clan> {
 		return msj;
 	}
 	
-	public String callMethodShowInfo(String namePerso) {
+	public String callMethodShowInfo(String namePerso) throws SamuraiNotFoundException {
 		String msj = "";
 		Samurai m = charactersFirst;
 		boolean t = false;
@@ -136,7 +196,9 @@ public class Clan implements Serializable, Comparator<Clan>,Comparable<Clan> {
 				m = m.getNext();
 			}
 		}
-		
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro");
+		}
 		
 		return msj;
 	}
@@ -338,12 +400,12 @@ public void ordenarPorBurbujaMejorada1() {
 	@Override
 	public int compareTo(Clan o) {
 		// TODO Auto-generated method stub
-		return 0;
+		return nameClan.compareToIgnoreCase(o.getNameClan());
 	}
 	@Override
 	public int compare(Clan o1, Clan o2) {
 		// TODO Auto-generated method stub
-		return 0;
+		return o1.getNameClan().compareToIgnoreCase(o2.getNameClan());
 	}
 	
 }

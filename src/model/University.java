@@ -21,6 +21,69 @@ public class University implements Serializable{
 		deserializableClan();
 	}
 	
+	public void ordenarPorInsercion(){
+		
+		for(int i = 1; i < clanes.size();i++) {
+			
+			for(int j = i; j > 0 && clanes.get(j-1).compareTo(clanes.get(j)) > 0;j--) {
+				Clan temp = clanes.get(j);
+				clanes.set(j, clanes.get(j-1));
+				clanes.set(j-1, temp);
+			}
+		}
+	}
+	
+	public void ordenarPorSeleccion() {
+		
+		for(int i = 0; i < clanes.size();i++) {
+			Clan menor = clanes.get(i);
+			int indice = i;
+			
+			for(int j = i + 1; j < clanes.size()-1;j++) {
+				if(clanes.get(j).compare(clanes.get(j),menor) > 0) {
+					menor = clanes.get(j);
+					indice = j;
+				}
+			}
+			Clan temp = clanes.get(i);
+			clanes.set(i, menor);
+			clanes.set(indice, temp);
+		}
+		
+	}
+	
+	public void modifiquePower(String nameClan,String nameSamurai,int nameNew) throws SamuraiNotFoundException, notClanException {
+		
+		boolean t = false;
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				
+				clanes.get(i).modificarPowerSamurai(nameSamurai, nameNew);
+				t = true;
+			}
+		}
+		if(t == false) {
+			throw new notClanException("No se encontro");
+		}
+		
+	}
+	
+	public void modifiqueDateCreation(String nameClan,String nameSamurai,String nameNew) throws SamuraiNotFoundException, notClanException {
+		
+		boolean t = false;
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				
+				clanes.get(i).modificarDateSamurai(nameSamurai, nameNew);
+				t = true;
+			}
+		}
+		if(t == false) {
+			throw new notClanException("No se encontro");
+		}
+		
+	}
+	
 	public void modifiqueNameClan(String nameClan,String nameNew) throws notClanException {
 		boolean t = false;
 		
@@ -33,6 +96,22 @@ public class University implements Serializable{
 		
 		if(t == false) {
 			throw new notClanException("No se encontro el clan");
+		}
+		
+	}
+	
+	public void modifiqueNameInfluencer(String nameClan,String nameSamurai,String nameNew) throws SamuraiNotFoundException, notClanException {
+		
+		boolean t = false;
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				
+				clanes.get(i).modificarNameInfluencer(nameSamurai, nameNew);
+				t = true;
+			}
+		}
+		if(t == false) {
+			throw new notClanException("No se encontro");
 		}
 		
 	}
@@ -108,7 +187,7 @@ public class University implements Serializable{
 		return msj;
 	}
 	
-	public String showInformationTechnique(String nameClan,String namePerso) {
+	public String showInformationTechnique(String nameClan,String namePerso) throws SamuraiNotFoundException, notClanException {
 		String msj = "";
 		boolean t = false;
 		for(int i = 0; i < clanes.size() && !t;i++) {
@@ -116,6 +195,10 @@ public class University implements Serializable{
 				msj += clanes.get(i).callMethodShowInfo(namePerso);
 				t = true;
 			}
+		}
+		
+		if(t == false) {
+			throw new notClanException("No se encontro");
 		}
 		
 		return msj;
