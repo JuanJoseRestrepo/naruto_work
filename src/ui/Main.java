@@ -1,4 +1,5 @@
 package ui;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import exceptions.ClanSImilarException;
@@ -31,9 +32,13 @@ public class Main {
 		System.out.println("3.Agregar una tecnica a un Samurai");
 		System.out.println("4.Eliminar un Clan");
 		System.out.println("5.Eliminar un Samurai");
-		System.out.println("6.Salir");
+		System.out.println("6.Eliminar Tecnica");
+		System.out.println("7. Mostrar info clan");
+		System.out.println("8. Mostrar info del personaje");
+		System.out.println("9.Mostrar info technicas");
+		System.out.println("10.Salir");
 		
-		while(inputUser != 6) {
+		while(inputUser != 10) {
 			try {
 			inputUser = reader.nextInt();
 			reader.nextLine();
@@ -66,7 +71,7 @@ public class Main {
 				Samurai m = new Samurai(nameSa,personality,dates,power);
 				
 				System.out.println(univer.callTheMethodLookForTheNoRepeatSamurai(nombreC, m));
-				
+				System.out.println(univer.showInformationSamurai(nombreC));
 			}else if(inputUser == 3){
 				System.out.println("Digite el nombre del clan");
 				String nameClan = reader.nextLine();
@@ -93,8 +98,49 @@ public class Main {
 				System.out.println(univer.infoClan());
 				
 			}else if(inputUser == 5){
+			System.out.println("Digite el nombre del clan");
+			String nameClan = reader.nextLine();
 			
+			System.out.println("Digite el nombre del Samurai");
+			String nameNinja = reader.nextLine();
+			
+			univer.callDelatedSamurai(nameClan, nameNinja);
+			System.out.println(univer.showInformationSamurai(nameClan));
+			
+			}else if(inputUser == 6) {
+			System.out.println("Digite el nombre del clan");
+			String nombreDelClan = reader.nextLine();
+			
+			System.out.println("Digite el nombre del personaje");
+			String nombrePersonaje = reader.nextLine();
+			
+			System.out.println("Digite el nombre de la tecnica");
+			String nameTec = reader.nextLine();
+			
+			univer.callDelatedTechnique(nombreDelClan, nombrePersonaje, nameTec);
+			System.out.println(univer.showInformationTechnique(nombreDelClan, nombrePersonaje));
+			
+			}else if(inputUser == 7) {
+				
+				System.out.println(univer.infoClan());
+				
+			}else if(inputUser == 8) {
+				System.out.println("Por favor digite el nombre del clan");
+				String nameClan = reader.nextLine();
+				
+				System.out.println(univer.showInformationSamurai(nameClan));
+				
+			}else if(inputUser == 9) {
+				System.out.println("Por favor digite el nombre del clan");
+				String nameClan = reader.nextLine();
+				
+				System.out.println("Por favor digite el nombre del samurai");
+				String nameSamurai = reader.nextLine();
+				
+				System.out.println(univer.showInformationTechnique(nameClan, nameSamurai));
+				
 			}else{
+			
 				System.out.println("Hasta la proxima!!");
 				univer.serializableClan();
 			}
@@ -108,8 +154,13 @@ public class Main {
 		} catch (SamuraiNotFoundException e) {
 			System.out.println("No se encontro al ninja");
 			e.getCause();
+		}catch(InputMismatchException e) {
+			System.out.println("Digite una opcion valida");
+			reader.nextLine();
+			e.getCause();
 		}
 	}
+		
 }
 
 }

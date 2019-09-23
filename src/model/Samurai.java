@@ -451,11 +451,17 @@ public void ordenarPorInsercion() {
 		String msj = "";
 		Technique tAct = tech;
 		
-		while(tAct != null) {
-			
-			msj += tAct.toString() + "\n";
-			tAct = tAct.getNext();	
+		if(tAct == null) {
+			msj = "No tiene tecnicas";
+		}else {
+			while(tAct != null) {
+				
+				msj += tAct.toString() + "\n";
+				tAct = tAct.getNext();	
+			}
 		}
+		
+
 		
 		return msj;
 	}

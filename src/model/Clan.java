@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 import exceptions.SamuraiNotFoundException;
 
-public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samurai> {
+public class Clan implements Serializable, Comparator<Clan>,Comparable<Clan> {
 
 	/**
 	 * 
@@ -105,6 +105,41 @@ public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samura
 		return msj;
 	}
 	
+	public String callMethodShowInfo(String namePerso) {
+		String msj = "";
+		Samurai m = charactersFirst;
+		boolean t = false;
+		while(m != null && !t ) {
+			if(m.getNameCharacter().equalsIgnoreCase(namePerso)) {
+				msj += m.mostrarInfo();
+				t = true;
+			}else {
+				m = m.getNext();
+			}
+		}
+		
+		
+		return msj;
+	}
+	
+	public void callMethodDelatedSamurai(String samuName,String nameTechnique) throws SamuraiNotFoundException{
+		Samurai m = charactersFirst;
+		boolean t = false;
+		
+		while(m != null && !t) {
+			if(m.getNameCharacter().equalsIgnoreCase(samuName)){
+				
+				m.delatedTechniqueNameTechnique(nameTechnique);
+				t = true;
+			}else {
+				m = m.getNext();
+			}
+		}
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro el samurai");
+		}
+	}
+	
 	//Metodos finales
 	public String lookForNotRepeatCharacters(Samurai e) {
 		Samurai c = charactersFirst;
@@ -132,12 +167,17 @@ public class Clan implements Serializable, Comparator<Samurai>,Comparable<Samura
 		String msj = "";
 		Samurai tAct = charactersFirst;
 		
-		while(tAct != null) {
+		if(tAct == null) {
+		
+			msj = "No tiene personajes";
+			
+		}else {
+			while(tAct != null) {
 			
 			msj += tAct.toString() + "\n";
 			tAct = tAct.getNext();	
 		}
-		
+	}	
 		return msj;
 	}
 	
@@ -227,6 +267,46 @@ public void ordenarPorBurbujaMejorada() {
 		}while(t);
 	 }
 	 
+public void ordenarPorBurbujaMejorada1() {
+	
+	boolean t;
+	
+	do {
+	Samurai c = charactersFirst;
+	Samurai c1 = null;
+	Samurai sig = charactersFirst.getNext();
+	 t = false;
+	while(sig != null) {
+		if(c.compare(c,sig) > 0) {
+			t = true;
+			if(c1 != null) {
+				Samurai siguiente = sig.getNext();
+				c1.setNext(sig);
+				sig.setPrevius(c1);
+				sig.setNext(c);
+				c.setPrevius(sig);
+				c.setNext(siguiente);
+				}else {
+				
+				Samurai siguiente = sig.getNext();
+				charactersFirst = sig;
+				sig.setNext(c);
+				c.setPrevius(sig);
+				c.setNext(siguiente);
+				siguiente.setPrevius(c);
+			}
+			c1 = sig;
+			sig = c.getNext();
+		}else {
+			c1 = c;
+			c = sig;
+			sig = sig.getNext();
+		}
+	}
+}while(t);
+}      
+
+
 	public String toString() {
 		String msj = "";
 		
@@ -236,15 +316,13 @@ public void ordenarPorBurbujaMejorada() {
 		
 	}
 		
-	
 	@Override
-	public int compareTo(Samurai o) {
+	public int compareTo(Clan o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 	@Override
-	public int compare(Samurai o1, Samurai o2) {
+	public int compare(Clan o1, Clan o2) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
