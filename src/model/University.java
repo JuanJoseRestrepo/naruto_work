@@ -22,6 +22,107 @@ public class University implements Serializable{
 		deserializableClan();
 	}
 	
+	public String callMethodSecuencialTechniqueName(String nameClan,String nameSamu,String nameTechnique) throws SamuraiNotFoundException, notClanException {
+		String msj = "";
+		boolean t = false;
+		
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				msj += clanes.get(i).callMethodSecuencialSearchName(nameSamu, nameTechnique);
+				t = true;
+			}
+		}
+		
+		if(t == false) {
+			throw new notClanException("No se encontro");
+		}
+		
+		return msj;
+	}
+
+	public String callMethodSecuencialTechniqueInfluencer(String nameClan, String nameSamu,int influencer) throws notClanException, SamuraiNotFoundException {
+		String msj = "";
+		boolean t = false;
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				msj += clanes.get(i).callMethodSecuencialSearchInfluencer(nameSamu,influencer);
+				t = true;
+			}
+		}
+		
+		if(t == false) {
+			throw new notClanException("No se encontro");
+		}
+		
+		return msj;
+	}
+	
+	public String callMethodSecuencialSamuName(String nameClan, String nameSamu) throws notClanException {
+		String msj = "";
+		boolean t = false;
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				msj += clanes.get(i).getSamuName(nameSamu);
+				t = true;
+			}
+		}
+		
+		if(t == false) {
+			throw new notClanException("No se encontro");
+		}
+		
+		return msj;
+	}
+	
+	public String callMethodSecuencialPower(String nameClan,int influencer) throws notClanException {
+		String msj = "";
+		boolean t = false;
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				msj += clanes.get(i).getSamuPower(influencer);
+				t = true;
+			}
+		}
+		
+		if(t == false) {
+			throw new notClanException("No se encontro");
+		}
+		
+		return msj;
+	}
+	
+	public void callMethodSelectionMethod(String nameClan,String nameSamu) throws notClanException, SamuraiNotFoundException {
+		boolean t = false;
+		
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				clanes.get(i).callMethodSelection(nameSamu);
+				t = true;
+			}
+		}
+		if(t == false) {
+			throw new notClanException("No se encontro");
+		}
+	}
+	
+	public void callMethodInsertionMethod(String nameClan,String nameSamu) throws notClanException, SamuraiNotFoundException {
+		
+		boolean t = false;
+		for(int i = 0; i < clanes.size() && !t;i++) {
+			if(clanes.get(i).getNameClan().equalsIgnoreCase(nameClan)) {
+				clanes.get(i).callMethodInsercion(nameSamu);
+				t = true;
+			}
+			
+		}
+		
+		if(t == false) {
+			throw new notClanException("No se encontro");
+		}
+		
+	}
+	
+	
 	public void ordenarPorInsercion(){
 		
 		for(int i = 1; i < clanes.size();i++) {

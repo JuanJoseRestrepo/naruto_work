@@ -39,14 +39,26 @@ public class Main {
 		System.out.println("14.Modificar el poder del personaje del samurai");
 		System.out.println("15.Modificar el nombre de la tecnica");
 		System.out.println("16.Modificar el influenciador de a tecnica");
-		System.out.println("17.Salir");
+		System.out.println("17.Buscar secuencialmente el nombre de la tecnica");
+		System.out.println("18.Buscar secuencialmente el influenciador de la tecnica");
+		System.out.println("19.Buscar secuencialmente el nombre del samurai");
+		System.out.println("20.Buscar secuencialmente el poder del samurai");
+		System.out.println("21.Mostrar ordenadamente technicas");
+		System.out.println("22.Mostrar ordenadamente las technicas 2");
+		System.out.println("23.Buscar secuencialmente a un clan");
+		System.out.println("24.Mostrar ordenadamente a los samurais");
+		System.out.println("25. Mostrar ordanadamente a los samurais 2");
+		System.out.println("26.Salir");
+		System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+		System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 		
-		while(inputUser != 17) {
+		
+		while(inputUser != 26) {
 			try {
 			inputUser = reader.nextInt();
 			reader.nextLine();
 			
-			if(inputUser <= 0 || inputUser >= 18) {
+			if(inputUser <= 0 || inputUser >= 27) {
 				throw new errorRank("Se salio");
 			}
 			
@@ -245,8 +257,135 @@ public class Main {
 				
 				univer.modifiquePowerTechnique(nameC, nameSamu, nameTechnique, powerTech);
 				System.out.println(univer.showInformationTechnique(nameC, nameSamu));
+			}else if(inputUser == 17) {
+				System.out.println("Digite el nombre del clan");
+				String nameC = reader.nextLine();
+				
+				System.out.println("Digite el nombre del samurai");
+				String nameSamu = reader.nextLine();
+				
+				System.out.println("Digite el nombre de la tecnica");
+				String nameTech = reader.nextLine();
+				
+				Long a = System.currentTimeMillis();
+				System.out.println(univer.callMethodSecuencialTechniqueName(nameC, nameSamu, nameTech));
+				Long b = System.currentTimeMillis();
+				
+				System.out.println("El tiempo que se demora es:" + (b-a));
+				
+			}else if(inputUser == 18) {
+				System.out.println("Digite el nombre del clan");
+				String nameC = reader.nextLine();
+				
+				System.out.println("DIgite el nombre del samurai");
+				String nameSamu = reader.nextLine();
+				
+				System.out.println("Digite el factor de influencia de la tecnica");
+				int influencer = reader.nextInt();
+				reader.nextLine();
+				
+				Long a = System.currentTimeMillis();
+				System.out.println(univer.callMethodSecuencialTechniqueInfluencer(nameC,nameSamu,influencer));
+				Long b = System.currentTimeMillis();
+				
+				System.out.println("El tiempo que se demora es:" + (b-a));
+				
+			}else if(inputUser == 19) {
+				System.out.println("Digite el nombre del clan");
+				String nameC = reader.nextLine();
+				
+				System.out.println("Digite el nombre del samurai");
+				String nameSamu = reader.nextLine();
+				
+				Long a = System.currentTimeMillis();
+				System.out.println(univer.callMethodSecuencialSamuName(nameC, nameSamu));
+				Long b = System.currentTimeMillis();
+				
+				System.out.println("El tiempo que se demora es:" + (b-a));
+				
+			}else if(inputUser == 20) {
+				System.out.println("Digite el nombre del clan");
+				String nameC = reader.nextLine();
+				
+				System.out.println("Digite el poder del samurai");
+				int power = reader.nextInt();
+				reader.nextLine();
+				
+				Long a = System.currentTimeMillis();
+				System.out.println(univer.callMethodSecuencialPower(nameC, power));
+				Long b = System.currentTimeMillis();
+				
+				System.out.println("El tiempo que se demora es:" + (b-a));
+				
+			}else if(inputUser == 21) {
+				System.out.println("Digite el nombre del clan");
+				String nameC = reader.nextLine();
+				
+				System.out.println("Digite el nombre del samurai");
+				String nameSamu = reader.nextLine();
+				
+				long a = System.currentTimeMillis();
+				univer.callMethodSelectionMethod(nameC, nameSamu);
+				long b = System.currentTimeMillis();
+				
+				System.out.println(univer.showInformationTechnique(nameC, nameSamu));
+				System.out.println("El tiempo es:" + (b-a));
+			}else if(inputUser == 22) {
+				System.out.println("Digite el nombre del clan");
+				String nameC = reader.nextLine();
+				
+				System.out.println("Digite el nombre del samurai");
+				String nameSamu = reader.nextLine();
+				
+				long a = System.currentTimeMillis();
+				univer.callMethodInsertionMethod(nameC,nameSamu);
+				long b = System.currentTimeMillis();
+				
+				System.out.println(univer.showInformationTechnique(nameC, nameSamu));
+				System.out.println("El tiempo es:" + (b-a));
+			}else if(inputUser == 23) {
+				System.out.println("Digite el nombre del clan");
+				String nameC = reader.nextLine();
+				
+				long a = System.currentTimeMillis();
+				System.out.println(univer.searchObjectClan(nameC));
+				long b = System.currentTimeMillis();
+				
+				System.out.println("El tiempo es:" +(b-a));
+				
+			}else if(inputUser == 24) {
+				
+				System.out.println("Por favor digite el nombre del clan");
+				String nameClan = reader.nextLine();
+				
+				System.out.println("Por favor digite el nombre del samurai");
+				String nameSamurai = reader.nextLine();
+				
+				Long a = System.currentTimeMillis();
+				univer.callSortBurblePorNombre(nameClan);
+				Long b = System.currentTimeMillis();
+				
+				System.out.println(univer.showInformationTechnique(nameClan, nameSamurai));
+				
+				System.out.println("El tiempo es:" + (b-a));
+			}else if(inputUser == 25) {
+				
+				System.out.println("Por favor digite el nombre del clan");
+				String nameClan = reader.nextLine();
+				
+				System.out.println("Por favor digite el nombre del samurai");
+				String nameSamurai = reader.nextLine();
+				
+				Long a = System.currentTimeMillis();
+				univer.callSortBurblePorPower(nameClan);
+				Long b = System.currentTimeMillis();
+				
+				System.out.println(univer.showInformationTechnique(nameClan, nameSamurai));
+				
+				System.out.println("El tiempo es:" + (b-a));
+				
 			}
-			else if(inputUser == 17){
+			else if(inputUser == 26){
 			
 				System.out.println("Hasta la proxima!!");
 				univer.serializableClan();

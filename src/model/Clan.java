@@ -48,17 +48,79 @@ public class Clan implements Serializable, Comparator<Clan>,Comparable<Clan> {
 		this.charactersLast = charactersLast;
 	}
 	
-	public void callMethodInsercion(String nameSamurai) {
+	///Secuenciales////////////////
+	public String callMethodSecuencialSearchInfluencer(String nameSamurai,int influencer) throws SamuraiNotFoundException {
+		String msj = "";
 		Samurai m = charactersFirst;
 		boolean t = false;
 		
 		while(m != null && !t) {
 			if(m.getNameCharacter().equalsIgnoreCase(nameSamurai)) {
-				m.ordenarPorInsercion();
+				msj += m.getInfluencerObject(influencer);
 				t = true;
 			}else {
 			m = m.getNext();
 			}
+		}
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro un ninja");
+		}
+		
+		return msj;
+	}
+	
+	public String callMethodSecuencialSearchName(String nameSamurai,String nameTech) throws SamuraiNotFoundException {
+		String msj = "";
+		Samurai m = charactersFirst;
+		boolean t = false;
+		
+		while(m != null && !t) {
+			if(m.getNameCharacter().equalsIgnoreCase(nameSamurai)) {
+				 msj += m.getNameTechniqueObject(nameTech);
+				t = true;
+			}else {
+			m = m.getNext();
+			}
+		}
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro un ninja");
+		}
+		
+		return msj;
+	}
+	///////////////////////////////////////////////////////////
+	public void callMethodSelection(String nameSamurai) throws SamuraiNotFoundException {
+		Samurai m = charactersFirst;
+		boolean t = false;
+		
+		while(m != null && !t) {
+			if(m.getNameCharacter().equalsIgnoreCase(nameSamurai)) {
+				m.ordenarPorSeleccionNombre();
+				t = true;
+			}else {
+			m = m.getNext();
+			}
+		}
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro un ninja");
+		}
+	}
+	
+	public void callMethodInsercion(String nameSamurai) throws SamuraiNotFoundException {
+		Samurai m = charactersFirst;
+		boolean t = false;
+		
+		while(m != null && !t) {
+			if(m.getNameCharacter().equalsIgnoreCase(nameSamurai)) {
+				m.ordenarPorInsercionInfluencer();
+				t = true;
+			}else {
+			m = m.getNext();
+			}
+		}
+		
+		if(t == false) {
+			throw new SamuraiNotFoundException("No se encontro un ninja");
 		}
 		
 	}
@@ -366,6 +428,42 @@ public class Clan implements Serializable, Comparator<Clan>,Comparable<Clan> {
 		
 	}
 	
+///////////////////////////////////////////////////Secuenciales
+public String getSamuName(String samuName) {
+	String msj = "";
+	Samurai m = charactersFirst;
+	boolean t = false;
+	
+	while(m != null && !t) {
+		if(m.getNameCharacter().equalsIgnoreCase(samuName)) {
+			msj +="Este es:"+ m.toString();
+			t = true;
+		}else {
+			m = m.getNext();
+		}
+		
+	}
+	
+	return msj;
+}
+
+public String getSamuPower(int samuPower) {
+	String msj = "";
+	Samurai m = charactersFirst;
+	boolean t = false;
+	
+	while(m != null && !t) {
+		if(m.getPower() == samuPower) {
+			msj +="Este es:"+ m.toString();
+			t = true;
+		}else {
+			m = m.getNext();
+		}
+		
+	}
+	
+	return msj;
+}
 	
 public void ordenarPorBurbujaMejorada() {
 			

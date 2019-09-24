@@ -293,7 +293,7 @@ public void modificarPosicion(int x, Technique p) {
 		
 	}
 ////////////////////////////////////////////////////////////////////////////////////	
-	public void ordenarPorSeleccion() {
+	public void ordenarPorSeleccionNombre() {
 		
 		 Technique temp = null;
 		 Technique mayor = null;
@@ -386,7 +386,7 @@ public void modificarPosicion(int x, Technique p) {
 		return samu;
 	}
 	
-public void ordenarPorInsercion() {
+public void ordenarPorInsercionInfluencer() {
 		
 		Technique m = null;
 		int pos = 0;
@@ -419,6 +419,43 @@ public void ordenarPorInsercion() {
 		
 		
 	}
+
+
+/////////////////////////////////////////////Secuencial
+	public String getNameTechniqueObject(String techName) {
+		String msj = "";
+		Technique tAct = tech;
+		boolean t = false;
+		while(tAct != null && !t) {
+			if(tAct.getName().equalsIgnoreCase(techName)) {
+				
+				msj = "Este es:" + tAct.toString();
+				t = true;
+			}else {
+				tAct = tAct.getNext();
+			}
+			
+		}
+		return msj;
+	}
+	
+	public String getInfluencerObject(int influencer) {
+		String msj = "";
+		Technique tAct = tech;
+		boolean t = false;
+		while(tAct != null && !t) {
+			if(tAct.getInfluencer() == influencer) {
+				
+				msj = "Este es:" + tAct.toString();
+				t = true;
+			}else {
+				tAct = tAct.getNext();
+			}
+			
+		}
+		return msj;
+	}
+////////////////////////////////////////////////////////////////////////////
 	
 	public String mostrarInfo() {
 		String msj = "";

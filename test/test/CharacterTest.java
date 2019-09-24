@@ -88,7 +88,7 @@ public class CharacterTest {
 	
 		try {
 			charac.modificarInfluencer("m", 100);
-			charac.ordenarPorInsercion();
+			charac.ordenarPorInsercionInfluencer();
 			System.out.println(charac.mostrarInfo());
 		} catch (notFoundTechnique e) {
 			// TODO Auto-generated catch block
@@ -99,14 +99,14 @@ public class CharacterTest {
 	@Test
 	void ordenar() {
 		setupEscenario();
-		charac.ordenarPorSeleccion();
+		charac.ordenarPorSeleccionNombre();
 		System.out.println("//" +charac.mostrarInfo());
 	}
 	
 	@Test
 	void ordenar1() {
 		setupEscenario();
-		charac.ordenarPorInsercion();
+		charac.ordenarPorInsercionInfluencer();
 		System.out.println("//--" +charac.mostrarInfo());
 	}
 	
