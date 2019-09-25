@@ -15,6 +15,7 @@ import model.Technique;
  */
 class TechniqueTest {
 
+	private Technique tec1;
 	/**
 	 * Test method for {@link model.Technique#Technique(java.lang.String, int)}.
 	 */
