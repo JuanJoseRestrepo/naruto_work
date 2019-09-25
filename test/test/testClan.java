@@ -3,10 +3,12 @@ import model.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Collection;
+
 import org.junit.jupiter.api.Test;
 
 
-class testClan {
+class testClan  {
 	
 	private Clan c;
 	

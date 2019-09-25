@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Comparator;
 
 public class Technique implements Serializable, Comparator<Technique>,Comparable<Technique>{
